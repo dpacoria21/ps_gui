@@ -1,0 +1,9 @@
+C:\Users\diego\source\repos\Ventas_Farmacia\Ventas_Farmacia\x64\Debug\Ventas_Farmacia.vcxproj.AssemblyReference.cache
+C:\Users\diego\source\repos\Ventas_Farmacia\Ventas_Farmacia\x64\Debug\Ventas_Farmacia.vcxproj.SuggestedBindingRedirects.cache
+C:\Users\diego\source\repos\Ventas_Farmacia\Ventas_Farmacia\x64\Debug\Ventas_Farmacia.Form1.resources
+C:\Users\diego\source\repos\Ventas_Farmacia\Ventas_Farmacia\x64\Debug\Ventas_Farmacia.vcxproj.GenerateResource.cache
+C:\Users\diego\source\repos\Ventas_Farmacia\Ventas_Farmacia\x64\Debug\Ventas_Farmacia.addProduct.resources
+C:\Users\diego\source\repos\Ventas_Farmacia\Ventas_Farmacia\x64\Debug\Ventas_Farmacia.viewProducts.resources
+C:\Users\diego\source\repos\Ventas_Farmacia\Ventas_Farmacia\x64\Debug\Ventas_Farmacia.searchProduct.resources
+C:\Users\diego\source\repos\Ventas_Farmacia\Ventas_Farmacia\x64\Debug\Ventas_Farmacia.ventaProducts.resources
+C:\Users\diego\source\repos\Ventas_Farmacia\Ventas_Farmacia\x64\Debug\Ventas_Farmacia.viewVentas.resources

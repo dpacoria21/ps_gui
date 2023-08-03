@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Ventas_Farmacia", "Ventas_Farmacia\Ventas_Farmacia.vcxproj", "{4E1C9949-296B-40A8-A922-3D743BDBA0B6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4E1C9949-296B-40A8-A922-3D743BDBA0B6}.Debug|x64.ActiveCfg = Debug|x64
+		{4E1C9949-296B-40A8-A922-3D743BDBA0B6}.Debug|x64.Build.0 = Debug|x64
+		{4E1C9949-296B-40A8-A922-3D743BDBA0B6}.Debug|x86.ActiveCfg = Debug|Win32
+		{4E1C9949-296B-40A8-A922-3D743BDBA0B6}.Debug|x86.Build.0 = Debug|Win32
+		{4E1C9949-296B-40A8-A922-3D743BDBA0B6}.Release|x64.ActiveCfg = Release|x64
+		{4E1C9949-296B-40A8-A922-3D743BDBA0B6}.Release|x64.Build.0 = Release|x64
+		{4E1C9949-296B-40A8-A922-3D743BDBA0B6}.Release|x86.ActiveCfg = Release|Win32
+		{4E1C9949-296B-40A8-A922-3D743BDBA0B6}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B9A3D6DB-F7AD-4825-B14A-7C6E2DBDF9DB}
+	EndGlobalSection
+EndGlobal
