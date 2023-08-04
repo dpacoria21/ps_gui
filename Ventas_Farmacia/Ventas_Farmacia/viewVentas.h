@@ -62,6 +62,9 @@ namespace Ventas_Farmacia {
 	private: System::Windows::Forms::Button^ button2;
 	private: System::Windows::Forms::Label^ User;
 	private: System::Windows::Forms::Label^ label8;
+	private: System::Windows::Forms::Label^ label2;
+	private: System::Windows::Forms::Label^ total;
+
 
 
 
@@ -95,6 +98,8 @@ namespace Ventas_Farmacia {
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->User = (gcnew System::Windows::Forms::Label());
 			this->label8 = (gcnew System::Windows::Forms::Label());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->total = (gcnew System::Windows::Forms::Label());
 			this->panel3->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->BeginInit();
@@ -161,7 +166,7 @@ namespace Ventas_Farmacia {
 				this->dataGridViewTextBoxColumn1,
 					this->dataGridViewTextBoxColumn2, this->dataGridViewTextBoxColumn4, this->dataGridViewTextBoxColumn3
 			});
-			this->dataGridView2->Location = System::Drawing::Point(402, 93);
+			this->dataGridView2->Location = System::Drawing::Point(408, 58);
 			this->dataGridView2->Name = L"dataGridView2";
 			this->dataGridView2->Size = System::Drawing::Size(593, 387);
 			this->dataGridView2->TabIndex = 13;
@@ -221,7 +226,7 @@ namespace Ventas_Farmacia {
 			this->User->AutoSize = true;
 			this->User->Font = (gcnew System::Drawing::Font(L"Nirmala UI", 20.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->User->Location = System::Drawing::Point(544, 42);
+			this->User->Location = System::Drawing::Point(565, 18);
 			this->User->Name = L"User";
 			this->User->Size = System::Drawing::Size(0, 37);
 			this->User->TabIndex = 16;
@@ -231,17 +236,41 @@ namespace Ventas_Farmacia {
 			this->label8->AutoSize = true;
 			this->label8->Font = (gcnew System::Drawing::Font(L"Nirmala UI", 20.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label8->Location = System::Drawing::Point(395, 42);
+			this->label8->Location = System::Drawing::Point(401, 18);
 			this->label8->Name = L"label8";
 			this->label8->Size = System::Drawing::Size(143, 37);
 			this->label8->TabIndex = 15;
 			this->label8->Text = L"Venta de :";
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label2->Location = System::Drawing::Point(680, 466);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(89, 24);
+			this->label2->TabIndex = 17;
+			this->label2->Text = L"TOTAL: ";
+			// 
+			// total
+			// 
+			this->total->AutoSize = true;
+			this->total->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->total->Location = System::Drawing::Point(786, 466);
+			this->total->Name = L"total";
+			this->total->Size = System::Drawing::Size(0, 24);
+			this->total->TabIndex = 18;
+			this->total->Click += gcnew System::EventHandler(this, &viewVentas::label3_Click);
 			// 
 			// viewVentas
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1050, 554);
+			this->Controls->Add(this->total);
+			this->Controls->Add(this->label2);
 			this->Controls->Add(this->User);
 			this->Controls->Add(this->label8);
 			this->Controls->Add(this->dataGridView2);
@@ -293,6 +322,7 @@ namespace Ventas_Farmacia {
 					this->dataGridView2->Rows[n]->Cells[3]->Value = vc.medicamentos[i].precio;
 				}
 
+				this->total->Text = vc.total+"";
 				this->textBox1->Text = "";
 			}
 			catch (const string& e) {
@@ -333,5 +363,7 @@ namespace Ventas_Farmacia {
 			}
 			return i;
 		}
+private: System::Void label3_Click(System::Object^ sender, System::EventArgs^ e) {
+}
 };
 }

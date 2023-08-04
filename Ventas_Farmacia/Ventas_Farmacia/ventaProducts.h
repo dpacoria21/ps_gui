@@ -80,6 +80,8 @@ namespace Ventas_Farmacia {
 	private: System::Windows::Forms::Button^ button3;
 	private: System::Windows::Forms::Button^ button4;
 	private: System::Windows::Forms::Label^ verify;
+	private: System::Windows::Forms::Label^ total;
+	private: System::Windows::Forms::Label^ label5;
 
 
 
@@ -129,6 +131,8 @@ namespace Ventas_Farmacia {
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->verify = (gcnew System::Windows::Forms::Label());
+			this->total = (gcnew System::Windows::Forms::Label());
+			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->panel3->SuspendLayout();
 			this->panel2->SuspendLayout();
 			this->panel1->SuspendLayout();
@@ -435,7 +439,7 @@ namespace Ventas_Farmacia {
 			this->button3->BackColor = System::Drawing::SystemColors::ControlLight;
 			this->button3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->button3->Location = System::Drawing::Point(552, 446);
+			this->button3->Location = System::Drawing::Point(459, 446);
 			this->button3->Name = L"button3";
 			this->button3->Size = System::Drawing::Size(140, 49);
 			this->button3->TabIndex = 16;
@@ -448,7 +452,7 @@ namespace Ventas_Farmacia {
 			this->button4->BackColor = System::Drawing::SystemColors::ControlLight;
 			this->button4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->button4->Location = System::Drawing::Point(789, 446);
+			this->button4->Location = System::Drawing::Point(652, 446);
 			this->button4->Name = L"button4";
 			this->button4->Size = System::Drawing::Size(140, 49);
 			this->button4->TabIndex = 17;
@@ -467,11 +471,34 @@ namespace Ventas_Farmacia {
 			this->verify->TabIndex = 18;
 			this->verify->Click += gcnew System::EventHandler(this, &ventaProducts::label5_Click_1);
 			// 
+			// total
+			// 
+			this->total->AutoSize = true;
+			this->total->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->total->Location = System::Drawing::Point(965, 458);
+			this->total->Name = L"total";
+			this->total->Size = System::Drawing::Size(0, 24);
+			this->total->TabIndex = 20;
+			// 
+			// label5
+			// 
+			this->label5->AutoSize = true;
+			this->label5->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label5->Location = System::Drawing::Point(859, 458);
+			this->label5->Name = L"label5";
+			this->label5->Size = System::Drawing::Size(89, 24);
+			this->label5->TabIndex = 19;
+			this->label5->Text = L"TOTAL: ";
+			// 
 			// ventaProducts
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1072, 526);
+			this->Controls->Add(this->total);
+			this->Controls->Add(this->label5);
 			this->Controls->Add(this->verify);
 			this->Controls->Add(this->button4);
 			this->Controls->Add(this->button3);
@@ -560,6 +587,9 @@ namespace Ventas_Farmacia {
 		private: System::Void dataGridView2_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
 			// Este es un contenedor para los productos que vaya agregando
 		}
+
+		private: int suma;
+
 		private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 			string id = this->toStandardString(this->idProd->Text);
 			string cant = this->toStandardString(this->cant->Text);
@@ -595,7 +625,8 @@ namespace Ventas_Farmacia {
 				this->dataGridView2->Rows[n]->Cells[3]->Value = precioTotal;
 
 				agregarMedicamentoAlCarrito(v);
-
+				this->suma += precioTotal;
+				this->total->Text = this->suma+"";
 				this->idProd->Text = "";
 				this->cant->Text = "";
 			
