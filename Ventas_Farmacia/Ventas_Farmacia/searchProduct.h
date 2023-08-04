@@ -59,6 +59,7 @@ namespace Ventas_Farmacia {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Precio;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column1;
 	private: System::Windows::Forms::Button^ button2;
+	private: System::Windows::Forms::Button^ button1;
 
 	private:
 		/// <summary>
@@ -84,6 +85,7 @@ namespace Ventas_Farmacia {
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->panel2 = (gcnew System::Windows::Forms::Panel());
+			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
@@ -119,21 +121,18 @@ namespace Ventas_Farmacia {
 			// 
 			this->Nombre->HeaderText = L"Nombre";
 			this->Nombre->Name = L"Nombre";
-			this->Nombre->ReadOnly = true;
 			this->Nombre->Width = 150;
 			// 
 			// Precio
 			// 
 			this->Precio->HeaderText = L"Precio";
 			this->Precio->Name = L"Precio";
-			this->Precio->ReadOnly = true;
 			this->Precio->Width = 150;
 			// 
 			// Column1
 			// 
 			this->Column1->HeaderText = L"Stock";
 			this->Column1->Name = L"Column1";
-			this->Column1->ReadOnly = true;
 			this->Column1->Width = 150;
 			// 
 			// panel1
@@ -143,7 +142,7 @@ namespace Ventas_Farmacia {
 			this->panel1->Controls->Add(this->panel3);
 			this->panel1->Location = System::Drawing::Point(0, 162);
 			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(278, 174);
+			this->panel1->Size = System::Drawing::Size(278, 185);
 			this->panel1->TabIndex = 3;
 			// 
 			// button2
@@ -193,6 +192,7 @@ namespace Ventas_Farmacia {
 			// panel2
 			// 
 			this->panel2->BackColor = System::Drawing::SystemColors::ActiveCaption;
+			this->panel2->Controls->Add(this->button1);
 			this->panel2->Controls->Add(this->textBox4);
 			this->panel2->Controls->Add(this->label4);
 			this->panel2->Controls->Add(this->textBox3);
@@ -201,14 +201,26 @@ namespace Ventas_Farmacia {
 			this->panel2->Controls->Add(this->label2);
 			this->panel2->Location = System::Drawing::Point(284, 162);
 			this->panel2->Name = L"panel2";
-			this->panel2->Size = System::Drawing::Size(309, 174);
+			this->panel2->Size = System::Drawing::Size(309, 185);
 			this->panel2->TabIndex = 4;
+			// 
+			// button1
+			// 
+			this->button1->BackColor = System::Drawing::SystemColors::AppWorkspace;
+			this->button1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->button1->Location = System::Drawing::Point(79, 151);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(160, 31);
+			this->button1->TabIndex = 17;
+			this->button1->Text = L"ACTUALIZAR";
+			this->button1->UseVisualStyleBackColor = false;
+			this->button1->Click += gcnew System::EventHandler(this, &searchProduct::button1_Click);
 			// 
 			// textBox4
 			// 
-			this->textBox4->Location = System::Drawing::Point(100, 131);
+			this->textBox4->Location = System::Drawing::Point(105, 117);
 			this->textBox4->Name = L"textBox4";
-			this->textBox4->ReadOnly = true;
 			this->textBox4->Size = System::Drawing::Size(184, 20);
 			this->textBox4->TabIndex = 5;
 			// 
@@ -217,7 +229,7 @@ namespace Ventas_Farmacia {
 			this->label4->AutoSize = true;
 			this->label4->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label4->Location = System::Drawing::Point(11, 129);
+			this->label4->Location = System::Drawing::Point(16, 115);
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(61, 22);
 			this->label4->TabIndex = 4;
@@ -225,9 +237,8 @@ namespace Ventas_Farmacia {
 			// 
 			// textBox3
 			// 
-			this->textBox3->Location = System::Drawing::Point(100, 79);
+			this->textBox3->Location = System::Drawing::Point(105, 65);
 			this->textBox3->Name = L"textBox3";
-			this->textBox3->ReadOnly = true;
 			this->textBox3->Size = System::Drawing::Size(184, 20);
 			this->textBox3->TabIndex = 3;
 			// 
@@ -236,7 +247,7 @@ namespace Ventas_Farmacia {
 			this->label3->AutoSize = true;
 			this->label3->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label3->Location = System::Drawing::Point(11, 77);
+			this->label3->Location = System::Drawing::Point(16, 63);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(66, 22);
 			this->label3->TabIndex = 2;
@@ -245,9 +256,8 @@ namespace Ventas_Farmacia {
 			// 
 			// textBox2
 			// 
-			this->textBox2->Location = System::Drawing::Point(100, 28);
+			this->textBox2->Location = System::Drawing::Point(105, 14);
 			this->textBox2->Name = L"textBox2";
-			this->textBox2->ReadOnly = true;
 			this->textBox2->Size = System::Drawing::Size(184, 20);
 			this->textBox2->TabIndex = 1;
 			this->textBox2->TextChanged += gcnew System::EventHandler(this, &searchProduct::textBox2_TextChanged);
@@ -257,7 +267,7 @@ namespace Ventas_Farmacia {
 			this->label2->AutoSize = true;
 			this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label2->Location = System::Drawing::Point(11, 26);
+			this->label2->Location = System::Drawing::Point(16, 12);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(83, 22);
 			this->label2->TabIndex = 0;
@@ -268,7 +278,7 @@ namespace Ventas_Farmacia {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(592, 336);
+			this->ClientSize = System::Drawing::Size(592, 346);
 			this->Controls->Add(this->panel2);
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->dataGridView1);
@@ -305,7 +315,7 @@ namespace Ventas_Farmacia {
 			
 			try {
 				if (id == "") throw string("");
-				long long search = this->toInteger(id);
+				long long search = this->toLongLong(id);
 				Medicamento product = obtenerMedicamentoPorId(search);
 
 				string str(product.nombre);
@@ -318,7 +328,6 @@ namespace Ventas_Farmacia {
 				System::String^ ctn = product.cantidad.ToString();
 				this->textBox4->Text = ctn;
 
-				this->textBox1->Text = "";
 			}
 			catch (const string& e) {
 				MessageBox::Show("Ingrese un Id");
@@ -342,15 +351,7 @@ namespace Ventas_Farmacia {
 			}
 
 		}
-		private: static string toStandardString(System::String^ string) {
-			using System::Runtime::InteropServices::Marshal;
-			System::IntPtr pointer = Marshal::StringToHGlobalAnsi(string);
-			char* charPointer = reinterpret_cast<char*>(pointer.ToPointer());
-			std::string returnString(charPointer, string->Length);
-			Marshal::FreeHGlobal(pointer);
-			return returnString;
-		}
-		private: static long long toInteger(string s) {
+		private: static long long toLongLong(string s) {
 			long long i = 0;
 			for (char c : s)
 			{
@@ -363,5 +364,52 @@ namespace Ventas_Farmacia {
 			}
 			return i;
 		}
-};
+		private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+			string id = this->toStandardString(this->textBox1->Text);
+			if (id != "") {
+				long long search = this->toInteger(id);
+				Medicamento product = obtenerMedicamentoPorId(search);
+
+				for (int i = 0; i < medicamentos.size(); i++) {
+					if (search == medicamentos[i].id) {
+						string nombre = this->toStandardString(this->textBox2->Text);
+						strcpy_s(medicamentos[i].nombre, nombre.c_str());
+
+						string pre = this->toStandardString(this->textBox3->Text);
+						int precio = this->toInteger(pre);
+						medicamentos[i].precio = precio;
+
+						string cant = this->toStandardString(this->textBox4->Text);
+						int cantidad = toInteger(cant);
+						medicamentos[i].cantidad = cantidad;
+						break;
+					}
+				}
+				guardarMedicamentos();
+				this->Close();
+			}
+
+		}
+		private: static string toStandardString(System::String^ string) {
+			using System::Runtime::InteropServices::Marshal;
+			System::IntPtr pointer = Marshal::StringToHGlobalAnsi(string);
+			char* charPointer = reinterpret_cast<char*>(pointer.ToPointer());
+			std::string returnString(charPointer, string->Length);
+			Marshal::FreeHGlobal(pointer);
+			return returnString;
+		}
+		private: static int toInteger(string s) {
+			int i = 0;
+			for (char c : s)
+			{
+				if (c >= '0' && c <= '9') {
+					i = i * 10 + (c - '0');
+				}
+				else {
+					throw invalid_argument("error");
+				}
+			}
+			return i;
+		}
+	};
 }

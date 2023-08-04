@@ -1,13 +1,12 @@
-﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppClean.targets(77,5): warning : The process cannot access the file 'c:\users\diego\escritorio\ps_gui\ventas_farmacia\ventas_farmacia\x64\debug\definitions.obj' because it is being used by another process.
-  pch.cpp
+﻿  pch.cpp
   addProduct.cpp
 C:\Users\diego\Escritorio\ps_gui\Ventas_Farmacia\Ventas_Farmacia\addProduct.h(268,35): warning C4101: 'e': unreferenced local variable
   AssemblyInfo.cpp
   Clientes.cpp
   CppCLR_WinFormsProject.cpp
 C:\Users\diego\Escritorio\ps_gui\Ventas_Farmacia\Ventas_Farmacia\addProduct.h(268,35): warning C4101: 'e': unreferenced local variable
-C:\Users\diego\Escritorio\ps_gui\Ventas_Farmacia\Ventas_Farmacia\searchProduct.h(323,25): warning C4101: 'e': unreferenced local variable
-C:\Users\diego\Escritorio\ps_gui\Ventas_Farmacia\Ventas_Farmacia\searchProduct.h(326,35): warning C4101: 'e': unreferenced local variable
+C:\Users\diego\Escritorio\ps_gui\Ventas_Farmacia\Ventas_Farmacia\searchProduct.h(332,25): warning C4101: 'e': unreferenced local variable
+C:\Users\diego\Escritorio\ps_gui\Ventas_Farmacia\Ventas_Farmacia\searchProduct.h(335,35): warning C4101: 'e': unreferenced local variable
 C:\Users\diego\Escritorio\ps_gui\Ventas_Farmacia\Ventas_Farmacia\ventaProducts.h(634,25): warning C4101: 'e': unreferenced local variable
 C:\Users\diego\Escritorio\ps_gui\Ventas_Farmacia\Ventas_Farmacia\ventaProducts.h(637,35): warning C4101: 'e': unreferenced local variable
 C:\Users\diego\Escritorio\ps_gui\Ventas_Farmacia\Ventas_Farmacia\ventaProducts.h(640,15): warning C4101: 'e': unreferenced local variable
@@ -17,8 +16,8 @@ C:\Users\diego\Escritorio\ps_gui\Ventas_Farmacia\Ventas_Farmacia\viewVentas.h(33
   Form1.cpp
   Medicamentos.cpp
   searchProduct.cpp
-C:\Users\diego\Escritorio\ps_gui\Ventas_Farmacia\Ventas_Farmacia\searchProduct.h(323,25): warning C4101: 'e': unreferenced local variable
-C:\Users\diego\Escritorio\ps_gui\Ventas_Farmacia\Ventas_Farmacia\searchProduct.h(326,35): warning C4101: 'e': unreferenced local variable
+C:\Users\diego\Escritorio\ps_gui\Ventas_Farmacia\Ventas_Farmacia\searchProduct.h(332,25): warning C4101: 'e': unreferenced local variable
+C:\Users\diego\Escritorio\ps_gui\Ventas_Farmacia\Ventas_Farmacia\searchProduct.h(335,35): warning C4101: 'e': unreferenced local variable
   ventaProducts.cpp
 C:\Users\diego\Escritorio\ps_gui\Ventas_Farmacia\Ventas_Farmacia\ventaProducts.h(634,25): warning C4101: 'e': unreferenced local variable
 C:\Users\diego\Escritorio\ps_gui\Ventas_Farmacia\Ventas_Farmacia\ventaProducts.h(637,35): warning C4101: 'e': unreferenced local variable
