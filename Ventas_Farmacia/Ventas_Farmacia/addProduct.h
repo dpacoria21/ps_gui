@@ -1,13 +1,16 @@
 #pragma once
 
-namespace Ventas_Farmacia {
+#include "Medicamentos.h"
 
+namespace Ventas_Farmacia {
 	using namespace System;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace std;
+
 
 	/// <summary>
 	/// Summary for addProduct
@@ -39,13 +42,15 @@ namespace Ventas_Farmacia {
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Panel^ panel2;
 	private: System::Windows::Forms::Label^ label2;
-	private: System::Windows::Forms::TextBox^ textBox2;
+
 	private: System::Windows::Forms::Panel^ panel3;
 	private: System::Windows::Forms::Label^ label3;
 	private: System::Windows::Forms::TextBox^ textBox3;
 	private: System::Windows::Forms::Panel^ panel4;
 	private: System::Windows::Forms::Button^ button2;
 	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::TextBox^ price;
+
 	protected:
 
 	private:
@@ -66,13 +71,13 @@ namespace Ventas_Farmacia {
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->panel2 = (gcnew System::Windows::Forms::Panel());
 			this->label2 = (gcnew System::Windows::Forms::Label());
-			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->panel3 = (gcnew System::Windows::Forms::Panel());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
 			this->panel4 = (gcnew System::Windows::Forms::Panel());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->price = (gcnew System::Windows::Forms::TextBox());
 			this->panel1->SuspendLayout();
 			this->panel2->SuspendLayout();
 			this->panel3->SuspendLayout();
@@ -114,8 +119,8 @@ namespace Ventas_Farmacia {
 			// panel2
 			// 
 			this->panel2->BackColor = System::Drawing::SystemColors::AppWorkspace;
+			this->panel2->Controls->Add(this->price);
 			this->panel2->Controls->Add(this->label2);
-			this->panel2->Controls->Add(this->textBox2);
 			this->panel2->Location = System::Drawing::Point(62, 159);
 			this->panel2->Name = L"panel2";
 			this->panel2->Size = System::Drawing::Size(198, 72);
@@ -131,15 +136,6 @@ namespace Ventas_Farmacia {
 			this->label2->Size = System::Drawing::Size(175, 16);
 			this->label2->TabIndex = 1;
 			this->label2->Text = L"Precio del Medicamento";
-			// 
-			// textBox2
-			// 
-			this->textBox2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->textBox2->Location = System::Drawing::Point(3, 43);
-			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(192, 26);
-			this->textBox2->TabIndex = 0;
 			// 
 			// panel3
 			// 
@@ -206,6 +202,16 @@ namespace Ventas_Farmacia {
 			this->button1->TabIndex = 4;
 			this->button1->Text = L"CREAR";
 			this->button1->UseVisualStyleBackColor = false;
+			this->button1->Click += gcnew System::EventHandler(this, &addProduct::button1_Click);
+			// 
+			// price
+			// 
+			this->price->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->price->Location = System::Drawing::Point(3, 43);
+			this->price->Name = L"price";
+			this->price->Size = System::Drawing::Size(192, 26);
+			this->price->TabIndex = 2;
 			// 
 			// addProduct
 			// 
@@ -229,14 +235,62 @@ namespace Ventas_Farmacia {
 
 		}
 #pragma endregion
-	private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
-	}
-	private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
-	}
-	private: System::Void label3_Click(System::Object^ sender, System::EventArgs^ e) {
-	}
-	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
-		this->Visible = false;
-	}
-};
+		private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+		}
+		private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
+		}
+		private: System::Void label3_Click(System::Object^ sender, System::EventArgs^ e) {
+		}
+		private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
+			this->Visible = false;
+		}
+		private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+			try {
+				Medicamento nuevoMedicamento;
+
+				string nombre = this->toStandardString(this->textBox1->Text);
+				strcpy_s(nuevoMedicamento.nombre, nombre.c_str());
+
+				string cant = this->toStandardString(this->textBox3->Text);
+				int cantidad = this->toInteger(cant);
+				nuevoMedicamento.cantidad = cantidad;
+
+				string aux = this->toStandardString(this->price->Text);
+				int auxiliar = this->toInteger(aux);
+				nuevoMedicamento.precio = auxiliar;
+
+				agregarMedicamento(nuevoMedicamento);
+
+				this->textBox1->Text = "";
+				this->price->Text = "";
+				this->textBox3->Text = "";
+			}
+			catch (const invalid_argument& e) {
+				MessageBox::Show("Ingrese numeros enteros en los campos precio y cantidad");
+			}
+			
+		}
+		
+		private: static string toStandardString(System::String^ string) {
+			using System::Runtime::InteropServices::Marshal;
+			System::IntPtr pointer = Marshal::StringToHGlobalAnsi(string);
+			char* charPointer = reinterpret_cast<char*>(pointer.ToPointer());
+			std::string returnString(charPointer, string->Length);
+			Marshal::FreeHGlobal(pointer);
+			return returnString;
+		}
+		private: static int toInteger(string s) {
+			int i = 0;
+			for (char c : s)
+			{
+				if (c >= '0' && c <= '9') {
+					i = i * 10 + (c - '0');
+				}
+				else {
+					throw invalid_argument("error");
+				}
+			}
+			return i;
+		}
+	};
 }

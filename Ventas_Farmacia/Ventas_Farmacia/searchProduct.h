@@ -1,5 +1,8 @@
 #pragma once
 
+#include "Medicamentos.h"
+#include "Definitions.h"
+
 namespace Ventas_Farmacia {
 
 	using namespace System;
@@ -154,6 +157,7 @@ namespace Ventas_Farmacia {
 			this->button2->TabIndex = 16;
 			this->button2->Text = L"BUSCAR";
 			this->button2->UseVisualStyleBackColor = false;
+			this->button2->Click += gcnew System::EventHandler(this, &searchProduct::button2_Click);
 			// 
 			// panel3
 			// 
@@ -270,6 +274,7 @@ namespace Ventas_Farmacia {
 			this->Controls->Add(this->dataGridView1);
 			this->Name = L"searchProduct";
 			this->Text = L"searchProduct";
+			this->Load += gcnew System::EventHandler(this, &searchProduct::searchProduct_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->panel1->ResumeLayout(false);
 			this->panel3->ResumeLayout(false);
@@ -290,10 +295,73 @@ namespace Ventas_Farmacia {
 
 		}
 		private: System::Void dataGridView1_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
-
+			
 		}
 		private: System::Void textBox2_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 
 		}
-	};
+		private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
+			string id = this->toStandardString(this->textBox1->Text);
+			
+			try {
+				if (id == "") throw string("");
+				long long search = this->toInteger(id);
+				Medicamento product = obtenerMedicamentoPorId(search);
+
+				string str(product.nombre);
+				String^ name = gcnew String(str.c_str());
+				this->textBox2->Text = name;
+				
+				System::String^ pr = product.precio.ToString();
+				this->textBox3->Text = pr;
+
+				System::String^ ctn = product.cantidad.ToString();
+				this->textBox4->Text = ctn;
+
+				this->textBox1->Text = "";
+			}
+			catch (const string& e) {
+				MessageBox::Show("Ingrese un Id");
+			}
+			catch (const invalid_argument& e) {
+				MessageBox::Show("Ingrese un Id válido");
+			}
+			
+		}
+		private: System::Void searchProduct_Load(System::Object^ sender, System::EventArgs^ e) {
+			vector<Medicamento> medicamentos = obtenerMedicamentos();
+
+			for (int i = 0; i < medicamentos.size(); i++) {
+				int n = this->dataGridView1->Rows->Add();
+				string str(medicamentos[i].nombre);
+				String^ name = gcnew String(str.c_str());
+				this->dataGridView1->Rows[n]->Cells[0]->Value = medicamentos[i].id;
+				this->dataGridView1->Rows[n]->Cells[1]->Value = name;
+				this->dataGridView1->Rows[n]->Cells[2]->Value = medicamentos[i].precio;
+				this->dataGridView1->Rows[n]->Cells[3]->Value = medicamentos[i].cantidad;
+			}
+
+		}
+		private: static string toStandardString(System::String^ string) {
+			using System::Runtime::InteropServices::Marshal;
+			System::IntPtr pointer = Marshal::StringToHGlobalAnsi(string);
+			char* charPointer = reinterpret_cast<char*>(pointer.ToPointer());
+			std::string returnString(charPointer, string->Length);
+			Marshal::FreeHGlobal(pointer);
+			return returnString;
+		}
+		private: static long long toInteger(string s) {
+			long long i = 0;
+			for (char c : s)
+			{
+				if (c >= '0' && c <= '9') {
+					i = i * 10 + (long long)(c - '0');
+				}
+				else {
+					throw invalid_argument("error");
+				}
+			}
+			return i;
+		}
+};
 }

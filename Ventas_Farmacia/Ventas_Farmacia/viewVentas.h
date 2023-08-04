@@ -1,5 +1,9 @@
 #pragma once
 
+#include "Ventas.h"
+#include "Clientes.h"
+#include "Medicamentos.h"
+
 namespace Ventas_Farmacia {
 
 	using namespace System;
@@ -157,7 +161,7 @@ namespace Ventas_Farmacia {
 				this->dataGridViewTextBoxColumn1,
 					this->dataGridViewTextBoxColumn2, this->dataGridViewTextBoxColumn4, this->dataGridViewTextBoxColumn3
 			});
-			this->dataGridView2->Location = System::Drawing::Point(397, 119);
+			this->dataGridView2->Location = System::Drawing::Point(402, 93);
 			this->dataGridView2->Name = L"dataGridView2";
 			this->dataGridView2->Size = System::Drawing::Size(593, 387);
 			this->dataGridView2->TabIndex = 13;
@@ -194,7 +198,7 @@ namespace Ventas_Farmacia {
 			this->panel1->BackColor = System::Drawing::SystemColors::ActiveCaption;
 			this->panel1->Controls->Add(this->button2);
 			this->panel1->Controls->Add(this->panel3);
-			this->panel1->Location = System::Drawing::Point(65, 359);
+			this->panel1->Location = System::Drawing::Point(67, 349);
 			this->panel1->Name = L"panel1";
 			this->panel1->Size = System::Drawing::Size(261, 147);
 			this->panel1->TabIndex = 6;
@@ -217,7 +221,7 @@ namespace Ventas_Farmacia {
 			this->User->AutoSize = true;
 			this->User->Font = (gcnew System::Drawing::Font(L"Nirmala UI", 20.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->User->Location = System::Drawing::Point(644, 53);
+			this->User->Location = System::Drawing::Point(544, 42);
 			this->User->Name = L"User";
 			this->User->Size = System::Drawing::Size(0, 37);
 			this->User->TabIndex = 16;
@@ -227,7 +231,7 @@ namespace Ventas_Farmacia {
 			this->label8->AutoSize = true;
 			this->label8->Font = (gcnew System::Drawing::Font(L"Nirmala UI", 20.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label8->Location = System::Drawing::Point(495, 53);
+			this->label8->Location = System::Drawing::Point(395, 42);
 			this->label8->Name = L"label8";
 			this->label8->Size = System::Drawing::Size(143, 37);
 			this->label8->TabIndex = 15;
@@ -259,10 +263,75 @@ namespace Ventas_Farmacia {
 		private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
 		}
 		private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
-			// Cuando selecciona la venta, agregar el nombre del usuario
-			User->Text = "Usuario";
+			string id = this->toStandardString(this->textBox1->Text);
+
+			try {
+				if (id == "") throw string("");
+				long long search = this->toInteger(id);
+				vector<VentaCabecera>ventas = obtenerVentas();
+				VentaCabecera vc;
+				for (int i = 0; i < ventas.size(); i++) {
+					if (ventas[i].id == search) {
+						vc = ventas[i];
+						break;
+					}
+				}
+
+				string str(vc.cliente.nombre);
+				String^ name = gcnew String(str.c_str());
+				this->User->Text = name;
+
+				this->dataGridView2->Rows->Clear();
+
+				for (int i = 0; i < vc.medicamentos.size(); i++) {
+					int n = this->dataGridView2->Rows->Add();
+					string str(vc.medicamentos[i].medicamento.nombre);
+					String^ name = gcnew String(str.c_str());
+					this->dataGridView2->Rows[n]->Cells[0]->Value = vc.medicamentos[i].medicamento.id;
+					this->dataGridView2->Rows[n]->Cells[1]->Value = name;
+					this->dataGridView2->Rows[n]->Cells[2]->Value = vc.medicamentos[i].cantidad;
+					this->dataGridView2->Rows[n]->Cells[3]->Value = vc.medicamentos[i].precio;
+				}
+
+				this->textBox1->Text = "";
+			}
+			catch (const string& e) {
+				MessageBox::Show("Ingrese un Id");
+			}
+			catch (const invalid_argument& e) {
+				MessageBox::Show("Ingrese un Id válido");
+			}
 		}
-	private: System::Void viewVentas_Load(System::Object^ sender, System::EventArgs^ e) {
-	}
+		private: System::Void viewVentas_Load(System::Object^ sender, System::EventArgs^ e) {
+			vector<VentaCabecera>ventas = obtenerVentas();
+			for (int i = 0; i < ventas.size(); i++) {
+				int n = this->dataGridView1->Rows->Add();
+				string str(ventas[i].cliente.nombre);
+				String^ name = gcnew String(str.c_str());
+				this->dataGridView1->Rows[n]->Cells[0]->Value = ventas[i].id;
+				this->dataGridView1->Rows[n]->Cells[1]->Value = name;
+			}
+		}
+		private: static string toStandardString(System::String^ string) {
+			using System::Runtime::InteropServices::Marshal;
+			System::IntPtr pointer = Marshal::StringToHGlobalAnsi(string);
+			char* charPointer = reinterpret_cast<char*>(pointer.ToPointer());
+			std::string returnString(charPointer, string->Length);
+			Marshal::FreeHGlobal(pointer);
+			return returnString;
+		}
+		private: static long long toInteger(string s) {
+			long long i = 0;
+			for (char c : s)
+			{
+				if (c >= '0' && c <= '9') {
+					i = i * 10 + (long long)(c - '0');
+				}
+				else {
+					throw invalid_argument("error");
+				}
+			}
+			return i;
+		}
 };
 }

@@ -6,6 +6,9 @@
 #include "searchProduct.h"
 #include "ventaProducts.h"
 #include "viewVentas.h"
+#include "Clientes.h"
+#include "Medicamentos.h"
+#include "Ventas.h"
 
 using namespace std;
 
@@ -201,6 +204,8 @@ namespace CppCLRWinFormsProject {
 #pragma endregion
 		private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e) {
 			this->Close();
+			guardarMedicamentos();
+			guardarClientes();
 		}
 		private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 			Ventas_Farmacia::addProduct^ addProduct = gcnew Ventas_Farmacia::addProduct();

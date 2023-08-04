@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Medicamentos.h"
+
 namespace Ventas_Farmacia {
 
 	using namespace System;
@@ -14,6 +16,7 @@ namespace Ventas_Farmacia {
 	/// </summary>
 	public ref class viewProducts : public System::Windows::Forms::Form
 	{
+
 	public:
 		viewProducts(void)
 		{
@@ -35,9 +38,11 @@ namespace Ventas_Farmacia {
 			}
 		}
 	private: System::Windows::Forms::DataGridView^ dataGridView1;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Nombre;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Precio;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column1;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Nombre;
+
+
 
 
 
@@ -80,9 +85,9 @@ namespace Ventas_Farmacia {
 		void InitializeComponent(void)
 		{
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
+			this->Nombre = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Precio = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Nombre = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -90,14 +95,21 @@ namespace Ventas_Farmacia {
 			// 
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(3) {
-				this->Precio,
-					this->Column1, this->Nombre
+				this->Nombre,
+					this->Precio, this->Column1
 			});
 			this->dataGridView1->Location = System::Drawing::Point(0, 0);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->Size = System::Drawing::Size(794, 307);
 			this->dataGridView1->TabIndex = 1;
 			this->dataGridView1->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &viewProducts::dataGridView1_CellContentClick);
+			// 
+			// Nombre
+			// 
+			this->Nombre->HeaderText = L"Nombre";
+			this->Nombre->Name = L"Nombre";
+			this->Nombre->ReadOnly = true;
+			this->Nombre->Width = 250;
 			// 
 			// Precio
 			// 
@@ -113,13 +125,6 @@ namespace Ventas_Farmacia {
 			this->Column1->ReadOnly = true;
 			this->Column1->Width = 250;
 			// 
-			// Nombre
-			// 
-			this->Nombre->HeaderText = L"Nombre";
-			this->Nombre->Name = L"Nombre";
-			this->Nombre->ReadOnly = true;
-			this->Nombre->Width = 250;
-			// 
 			// viewProducts
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -134,26 +139,29 @@ namespace Ventas_Farmacia {
 
 		}
 #pragma endregion
-	private: System::Void tableLayoutPanel1_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
-	}
-	private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
-	}
-	private: System::Void viewProducts_Load(System::Object^ sender, System::EventArgs^ e) {
-		// Cargar medicamentos Aqui
-		for (int i = 0; i < 5; i++) {
-			int n = this->dataGridView1->Rows->Add();
-			this->dataGridView1->Rows[n]->Cells[0]->Value = "Paracetamol";
-			this->dataGridView1->Rows[n]->Cells[1]->Value = "12";
-			this->dataGridView1->Rows[n]->Cells[2]->Value = "100";
+		private: System::Void tableLayoutPanel1_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
 		}
-		
-	}
-	private: System::Void tableLayoutPanel1_Paint_1(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
-	}
-	private: System::Void listView1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
-	}
-	private: System::Void dataGridView1_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+		private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
+		}
+		private: System::Void viewProducts_Load(System::Object^ sender, System::EventArgs^ e) {
+			vector<Medicamento> medicamentos = obtenerMedicamentos();
 
-	}
-};
+			for (int i = 0; i < medicamentos.size(); i++) {
+				int n = this->dataGridView1->Rows->Add();
+				string str(medicamentos[i].nombre);
+				String^ name = gcnew String(str.c_str());
+				this->dataGridView1->Rows[n]->Cells[0]->Value = name;
+				this->dataGridView1->Rows[n]->Cells[1]->Value = medicamentos[i].precio;
+				this->dataGridView1->Rows[n]->Cells[2]->Value = medicamentos[i].cantidad;
+			}
+		
+		}
+		private: System::Void tableLayoutPanel1_Paint_1(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
+		}
+		private: System::Void listView1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+		}
+		private: System::Void dataGridView1_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+			
+		}
+	};
 }
